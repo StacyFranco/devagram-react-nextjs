@@ -9,18 +9,39 @@ import {validarSenha,validarEmail} from '../../utils/validadores';
 import imagemEnvelope from '../../public/imagens/envelope.svg';
 import imagemChave from '../../public/imagens/chave.svg'
 import imagemLogo from '../../public/imagens/logo.svg'
+import UsuarioService from '../../services/UsuarioService'
 
-
-
+const usuarioService = new UsuarioService();
 
 export default function Login() {
     const [email,setEmail] = useState("");
     const [senha,setSenha] = useState("");
+    const [estaSubmentendo,setEstaSubmentendo] = useState(false);
 
     const validarFormulario = () =>{
         return(
             validarEmail(email) && validarSenha(senha)
         );
+    }
+
+    const aoSubmeter = async (e) =>{
+        e.preventDefault();
+        if(!validarFormulario){
+            return;
+        }
+        setEstaSubmentendo(true);
+
+        try {
+            await usuarioService.login({
+                login:email,
+                senha
+            });
+
+
+        }catch(error){
+            alert("Erro ao realizar login." + error?.response?.data?.erro)
+        }
+        setEstaSubmentendo(false);
     }
 
     return (
@@ -36,7 +57,7 @@ export default function Login() {
 
 
             <div className="conteudoPaginaPublica">
-                <form>
+                <form onSubmit={aoSubmeter}>
                     <InputPublico
                         imagem={imagemEnvelope}
                         texto="E-mail"
@@ -58,7 +79,7 @@ export default function Login() {
                     <Botao
                         texto = "Login"
                         tipo= "submit"
-                        desabilitado={!validarFormulario()}            
+                        desabilitado={!validarFormulario() || estaSubmentendo}            
                     />
                 </form>
 

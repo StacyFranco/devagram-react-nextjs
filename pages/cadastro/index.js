@@ -6,6 +6,7 @@ import InputPublico from '../../componentes/inputPublico';
 import Botao from '../../componentes/botao';
 import UploadImagem from '../../componentes/uploadImagem';
 import {validarSenha,validarEmail,validarNome,validarConfirmacaoSenha} from '../../utils/validadores';
+import UsuarioService from '../../services/UsuarioService';
 
 import imagemLogo from '../../public/imagens/logo.svg';
 import imagemUsuarioAtivo from '../../public/imagens/usuarioAtivo.svg';
@@ -13,6 +14,7 @@ import imagemEnvelope from '../../public/imagens/envelope.svg';
 import imagemChave from '../../public/imagens/chave.svg';
 import imagemAvatar from '../../public/imagens/avatar.svg';
 
+const usuarioService = new UsuarioService();
 
 export default function Cadastro() {
     const [imagem,setImagem] = useState(null);
@@ -20,6 +22,7 @@ export default function Cadastro() {
     const [email,setEmail] = useState("");
     const [senha,setSenha] = useState("");
     const [confirmacaoSenha,setConfirmacaoSenha] = useState("");
+    const [estaSubmentendo,setEstaSubmentendo] = useState(false);
     
     const validarFormulario = () =>{
         return(
@@ -29,6 +32,32 @@ export default function Cadastro() {
             validarConfirmacaoSenha(senha,confirmacaoSenha)
 
         );
+    }
+
+    const  aoSubmeter = async (e) => {
+        e.preventDefault();
+        if(!validarFormulario){
+            return;
+        }
+        setEstaSubmentendo(true);
+        try {
+            const corpoReqCadastro = new FormData();
+            corpoReqCadastro.append("nome",nome);
+            corpoReqCadastro.append("email",email);
+            corpoReqCadastro.append("senha",senha);
+
+            if(imagem?.arquivo){
+                corpoReqCadastro.append("file",imagem.arquivo); 
+            }
+
+            await usuarioService.cadastro(corpoReqCadastro);
+            alert("Usuario Cadastrado com sucesso!")
+            // TO DO : autenticar o usuario diretamente apos o cadastro
+        }catch(error) {
+            alert("Erro ao cadastrar usuario." + error?.response?.data?.erro)
+        }
+
+        setEstaSubmentendo(false);
     }
 
     return (
@@ -44,7 +73,7 @@ export default function Cadastro() {
 
 
             <div className="conteudoPaginaPublica">
-                <form>
+                <form onSubmit={aoSubmeter}>
                     <UploadImagem
                         imagemPreviewClassName = 'avatar avatarPreview'
                         setImagem={setImagem} 
@@ -92,7 +121,7 @@ export default function Cadastro() {
                     <Botao
                         texto="Cadastrar"
                         tipo="submit"
-                        desabilitado={!validarFormulario()}
+                        desabilitado={!validarFormulario() || estaSubmentendo}
                     />
                 </form>
                 <div className='rodapePaginaPublica'>
