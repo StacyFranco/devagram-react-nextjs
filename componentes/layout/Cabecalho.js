@@ -4,41 +4,40 @@ import ResultadoPesquisa from '../layout/ResultadoPesquisa'
 import logoHorizontalImg from '../../public/imagens/logoHorizontal.svg'
 import imagemLupa from '../../public/imagens/lupa.svg'
 import { useState } from 'react';
+import UsuarioService from '../../services/UsuarioService';
+import { useRouter } from 'next/router';
+
+const usuarioService = new UsuarioService();
 
 export default function Cabecalho() {
     const [resultadoPesquisa, setResultoPesquisa] = useState([]);
     const [termoPesquisado, setTermoPesquisado] = useState('');
+    const router = useRouter();
 
-    const aoPesquisar = (e) => {
+    const aoPesquisar = async (e) => {
         setTermoPesquisado(e.target.value);
         setResultoPesquisa([]);
-        if (termoPesquisado.length < 3) {
+        if (termoPesquisado.length < 2) {
             return
         }
-        setResultoPesquisa([
-            {
-                avatar: '',
-                nome: 'teste',
-                email: 'teste@t.com',
-                _id: 123,
-            },
-            {
-                avatar: '',
-                nome: 'teste2',
-                email: 'teste2@t.com',
-                _id: 1232,
-            },
-            {
-                avatar: '',
-                nome: 'teste3',
-                email: 'teste3@t.com',
-                _id: 1233,
-            }
-        ])
+
+        try{
+            const {data} = await usuarioService.pesquisar(termoPesquisado)
+            setResultoPesquisa(data);
+            
+        }catch(error){
+            alert("Erro ao pesquisar usuario" + error?.response?.data?.erro)
+        }
     }
 
     const aoClicarResultadoPesquisa = (id) => {
-        console.log('aoClicarResultadoPesquisa', { id })
+        setResultoPesquisa([]);
+        setTermoPesquisado('');
+        router.push(`/perfil/${id}`);
+    }
+
+    const redirecionarParaHome = () =>{
+      router.push('/');  
     }
 
     return (
@@ -46,6 +45,7 @@ export default function Cabecalho() {
             <div className='conteudoCabecalhoPrincipal'>
                 <div className='logoCabecalhoPrincipal'>
                     <Image
+                    onClick={redirecionarParaHome}
                         src={logoHorizontalImg}
                         alt='Logo devagram'
                         layout='fill'
