@@ -4,7 +4,13 @@
     margin-top: 16px !important;
 
     .postagem {
-      
+
+        .avatar {
+            height: 32px;
+            width: 32px;
+            margin-right: 8px;
+        }
+
         .cabecalhoPostagem {
             display: flex;
             align-items: center;
@@ -12,11 +18,6 @@
             margin-bottom: 8px;
 
 
-            .avatar {
-                height: 32px;
-                width: 32px;
-                margin-right: 8px;
-            }
 
             strong {
                 font-size: 12px;
@@ -42,10 +43,18 @@
                 margin-right: 4px;
                 color: $cinza4;
             }
-            p.descricao{
+
+            p.descricao {
                 font-size: 12px;
                 margin: 0 0 2px;
                 color: $cinza4;
+
+                .exibirDescricaoCompleta {
+                    font-size: 12px;
+                    color: $corPrimaria3;
+                    margin-left: 4px;
+                    cursor: pointer;
+                }
             }
 
             .acoesPostagem {
@@ -53,16 +62,17 @@
                 align-items: center;
                 margin-bottom: 6px;
 
-                > img{
+                >img {
                     margin-right: 6px;
+                    cursor: pointer;
                 }
 
-                .quantidadeCurtidas{
+                .quantidadeCurtidas {
                     font-family: $fontLight;
                     font-size: 10px;
                     color: $cinza4;
 
-                    strong{
+                    strong {
                         font-size: 10px;
                         color: $cinza4;
                     }
@@ -70,9 +80,47 @@
             }
         }
 
+        .containerFazerComentario {
+            display: flex;
+            padding: 0 12px;
+            align-items: center;
+            margin-bottom: 16px;
+
+            textarea {
+                resize: none;
+                flex: 1;
+                border: none;
+                outline: none;
+                font-size: 12px;
+                color: $cinza2;
+
+            }
+        }
     }
 
     @media screen and (min-width: $desktopBreakpoint) {
-       padding-top: 8px;
+        padding-top: 8px;
+
+        .postagem {
+
+            .avatar {
+                height: 42px;
+                width: 42px;
+            }
+
+            .containerFazerComentario{
+                margin-top: 12px;
+
+               .btnPublicacao{
+                    background-color: transparent;
+                    color: $corPrimaria;
+                    outline: none;
+                    border: none;
+                    font-size: 12px;
+                    cursor: pointer;
+                
+               } 
+            }
+        }
     }
 }

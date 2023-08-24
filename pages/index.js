@@ -7,16 +7,19 @@ const usuarioService = new UsuarioService();
 
 export default function Index() {
 
-  const [estaAutenticado, setEstaAutenticado] = useState(false);
+  const [estaAutenticado, setEstaAutenticado] = useState(null);
 
   useEffect(() => {
     setEstaAutenticado(
       usuarioService.estaAutenticado()
     );
-  },[])
+  }, [])
 
-  if(estaAutenticado){
-    return <Home />
+  if (estaAutenticado === null){
+    return null;
   }
-  return <Login aposAutenticacao={()=>setEstaAutenticado(true)} />
- }
+    if (estaAutenticado) {
+      return <Home />
+    }
+  return <Login aposAutenticacao={() => setEstaAutenticado(true)} />
+}
