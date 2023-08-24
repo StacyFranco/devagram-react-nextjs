@@ -23,7 +23,7 @@ export default function feed({ usuarioLogado }) {
                      },
                      fotoDoPost:postagem.foto,
                      descricao: postagem.descricao,
-                     Curtidas: postagem.likes,
+                     curtidas: postagem.likes,
                      comentarios:postagem.comentarios.map(c=>({
                          nome: c.nome,
                          mensagem: c.comentario
