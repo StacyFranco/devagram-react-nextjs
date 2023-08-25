@@ -1,5 +1,6 @@
 .cabecalhoPrincipal {
     border-bottom: 0.5px solid $cinza1;
+    margin-bottom: 16px;
 
     .conteudoCabecalhoPrincipal {
         display: flex;
@@ -78,6 +79,7 @@
     @media screen and (min-width: $desktopBreakpoint) {
         background-color: $branco;
         border: none;
+        margin-bottom: 30px;
 
         .conteudoCabecalhoPrincipal {
             max-width: 60%;

@@ -30,6 +30,13 @@ export default class UsuarioService extends HttpService{
         return this.get('/pesquisa?filtro='+termoDaPesquisa)
     }
 
+    async obterPerfil(idUsuario){
+        return this.get(`/pesquisa?id=${idUsuario}`);
+    }
+
+    async alternarSeguir(idUsuario){
+        return this.put(`/seguir?id=${idUsuario}`);
+    }
 
     obterInformacoesDoUsuarioLogado(){
         return{
@@ -39,5 +46,7 @@ export default class UsuarioService extends HttpService{
             avatar: localStorage.getItem('avatar')
         }
     }
+
+
 
 }

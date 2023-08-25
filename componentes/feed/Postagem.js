@@ -52,8 +52,7 @@ export default function Postagem({
     }
 
     const comentar = async (comentario) =>{
-        console.log('fazer comentario')
-
+       
        try{
         await feedService.adicionarComentario(id,comentario);
         setDeveExibirSecaoParaComentar(false);
@@ -99,6 +98,8 @@ export default function Postagem({
        : imgCurtir
     }
 
+
+    //console.log('postagem dados usuario:',usuario)
     return (
         <div className="postagem">
             <Link href={`/perfil/${usuario.id}`}>

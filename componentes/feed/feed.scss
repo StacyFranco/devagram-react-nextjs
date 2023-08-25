@@ -1,7 +1,7 @@
 .feedContainer {
     padding-bottom: 60px;
     background-color: $branco;
-    margin-top: 16px !important;
+    
 
     .postagem {
 
@@ -100,8 +100,13 @@
 
     @media screen and (min-width: $desktopBreakpoint) {
         padding-top: 8px;
+       
 
         .postagem {
+
+            .cabecalhoPostagem{
+                cursor: pointer;
+            }
 
             .avatar {
                 height: 42px;

@@ -3,6 +3,8 @@ import HttpService from "./HttpService";
 
 export default class FeedService extends HttpService {
     async carregarPostagens(idUsuario) {
+        //console.log('qual feed vai carregar?',idUsuario)
+
         let url = '/feed';
         if (idUsuario) {
             url += `?id=${idUsuario}`;
