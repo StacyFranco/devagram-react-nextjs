@@ -4,7 +4,6 @@ import imagemAvatar from '../public/imagens/avatar.svg';
 export default class UsuarioService extends HttpService{
     async login(credenciais) {
         const {data} = await this.post('/login', credenciais);
-        console.log(data)
         localStorage.setItem("nome",data.nome);
         localStorage.setItem("email",data.email);
         localStorage.setItem("token",data.token);
@@ -16,6 +15,14 @@ export default class UsuarioService extends HttpService{
             localStorage.setItem("avatar",usuario.data.avatar);
         }
         
+    }
+
+    async logout(){
+        localStorage.removeItem("nome");
+        localStorage.removeItem("email");
+        localStorage.removeItem("token");
+        localStorage.removeItem("id");
+        localStorage.removeItem("avatar");
     }
 
     async cadastro(dados){

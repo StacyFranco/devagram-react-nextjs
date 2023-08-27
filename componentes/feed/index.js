@@ -35,20 +35,34 @@ export default function feed({ usuarioLogado, usuario }) {
                     }))
                 }
             ));
-            setListaDePostagens(postagensFormatadas);
-        }else{setListaDePostagens([])}
-       
+           // setListaDePostagens(postagensFormatadas);
+           return postagensFormatadas;
+        }else{
+            //setListaDePostagens([])}
+            return [];}
        
     }
 
 
     useEffect(() => {
-        
+        // variavel para cleanup function!
+        let ignore =false;
+
         console.log('chegou no feed, comid?',usuario?._id);
-        pegarPostagens();
+        pegarPostagens().then((resultdo) => {
+            if(!ignore){
+                setListaDePostagens(resultdo)
+            }
+        });
         console.log('qual postagem chegou?', listaDePostagens);
 
-    }, [usuarioLogado, usuario]);//, teste]);
+        return () => {
+            ignore = true;
+        }
+
+    }, [usuarioLogado, usuario]);
+    
+    //, teste]);
     if (!listaDePostagens.length) {
         return null;
     }
