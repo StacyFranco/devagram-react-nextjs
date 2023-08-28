@@ -62,7 +62,7 @@ function editarPerfil({usuarioLogado}) {
 
     const abrirSeletorDeArquivos = () => {
         inputAvatar?.click();
-        //console.log('abrir seletor de arquivos')
+        
     }
 
     return (

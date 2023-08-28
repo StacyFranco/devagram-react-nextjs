@@ -18,7 +18,7 @@ function Perfil({ usuarioLogado, }) {
         try {
             
             if (!router.query.id) {
-                console.log('sem router.query.id... faz nada')
+                
                 return;
             }
             /* Realizando com if else comum
@@ -54,9 +54,9 @@ function Perfil({ usuarioLogado, }) {
 
     useEffect(() => {
         
-        //console.log("Vou atualizar a Pagina Perfil com o que? :");
+        
         obterPerfil();
-        //console.log('deveria atualizar agora?',usuario);
+        
         
     }, [router.query.id]);//,teste]);
 

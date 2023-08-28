@@ -11,6 +11,7 @@
 @import '../componentes/cabecalhoComAcoes/cabecalhoComAcoes.scss';
 @import '../pages/perfil/perfil.scss';
 @import '../pages/publicacao/publicacao.scss';
+@import '../componentes/loading/loading.scss';
 
 * {
     font-family: $fontRegular;
@@ -31,7 +32,7 @@ body,
 }
 
 .oculto {
-    display: none;
+    display: none !important;
 }
 
 input {

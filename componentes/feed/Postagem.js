@@ -99,7 +99,7 @@ export default function Postagem({
     }
 
 
-    //console.log('postagem dados usuario:',usuario)
+    
     return (
         <div className="postagem">
             <Link href={`/perfil/${usuario.id}`}>

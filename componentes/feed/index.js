@@ -48,13 +48,13 @@ export default function feed({ usuarioLogado, usuario }) {
         // variavel para cleanup function!
         let ignore =false;
 
-        console.log('chegou no feed, comid?',usuario?._id);
+        
         pegarPostagens().then((resultdo) => {
             if(!ignore){
                 setListaDePostagens(resultdo)
             }
         });
-        console.log('qual postagem chegou?', listaDePostagens);
+        
 
         return () => {
             ignore = true;
