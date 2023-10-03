@@ -2,6 +2,8 @@
 
 Projeto desenvolvido para apresentação do react.js e next na formação Devaria 2023.
 
+Exemplo em funcionamento: https://devagram-react-nextjs-stacyfranco.vercel.app/
+
 ###Tecnologias Utilizadas
 
 - React.js 18.2.0
