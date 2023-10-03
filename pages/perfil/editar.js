@@ -13,7 +13,7 @@ import UsuarioService from "../../services/UsuarioService";
 
 const usuarioService = new UsuarioService();
 
-function editarPerfil({usuarioLogado}) {
+function EditarPerfil({usuarioLogado}) {
     const [avatar, setAvatar] = useState();
     const [inputAvatar, setInputAvatar] = useState(null);
     const [nome, setNome] = useState('');
@@ -114,4 +114,4 @@ function editarPerfil({usuarioLogado}) {
         </div>
     )
 }
-export default comAutorizacao(editarPerfil)
+export default comAutorizacao(EditarPerfil)
